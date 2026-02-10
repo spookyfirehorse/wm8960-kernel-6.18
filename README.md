@@ -14,8 +14,14 @@ Get the wm8960 soundcard source code. and install all linux kernel drivers
 git clone https://github.com/waveshare/WM8960-Audio-HAT
 cd WM8960-Audio-HAT
 sudo ./install.sh 
+```
+
+```bash
 sudo reboot
-#
+```
+#or
+
+```bash
 make
 sudo make install
 ```
