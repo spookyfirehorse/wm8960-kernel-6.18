@@ -1,3 +1,11 @@
+
+# test
+
+
+    dmesg | grep -iE "wm8960|asoc|i2c"
+    lsmod | grep -E "wm8960|snd_soc|bcm2835_i2s|simple"
+
+
 # rpi 4 kernel 6.18
 
 ```bash
@@ -315,3 +323,8 @@ EOF
 chmod +x install_wm8960_rpi4_6.18.sh
 ./install_wm8960_rpi4_6.18.sh
 ```
+# test
+
+
+dmesg | grep -iE "wm8960|asoc|i2c"
+lsmod | grep -E "wm8960|snd_soc|bcm2835_i2s|simple"
