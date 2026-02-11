@@ -1,3 +1,104 @@
+# rpi 5
+
+```bash
+cat << 'EOF' > install_wm8960_rpi5.sh
+#!/bin/bash
+# WM8960 Installer für RPi 5 - Kernel 6.12
+# Nutzt den RP1-I/O-Controller für I2S und I2C
+
+echo "--- Starte WM8960 Installation für RPi 5 ---"
+
+# 1. Tools installieren
+sudo apt update
+sudo apt install -y device-tree-compiler i2c-tools
+
+# 2. Das RPi 5 spezifische Overlay (DTS)
+cat << 'DTS' > wm8960-rpi5.dts
+/dts-v1/;
+/plugin/;
+
+/ {
+    /* Kompatibilität für RPi 5 (BCM2712) */
+    compatible = "brcm,bcm2712";
+
+    /* I2S am RP1-Chip aktivieren */
+    fragment@0 {
+        target = <&i2s_rp1>;
+        __overlay__ {
+            status = "okay";
+        };
+    };
+
+    /* I2C am RP1-Chip aktivieren */
+    fragment@1 {
+        target = <&i2c1_rp1>;
+        __overlay__ {
+            #address-cells = <1>;
+            #size-cells = <0>;
+            status = "okay";
+
+            wm8960: wm8960@1a {
+                compatible = "wlf,wm8960";
+                reg = <0x1a>;
+                #sound-dai-cells = <0>;
+                /* RPi 5 braucht oft explizite Power-Definitionen */
+                AVDD-supply = <&vdd_3v3_reg>;
+                DVDD-supply = <&vdd_3v3_reg>;
+            };
+        };
+    };
+
+    /* Die Soundkarte verbinden */
+    fragment@2 {
+        target-path = "/";
+        __overlay__ {
+            wm8960_card {
+                compatible = "simple-audio-card";
+                simple-audio-card,name = "WM8960-Audio";
+                simple-audio-card,format = "i2s";
+                simple-audio-card,bitclock-master = <&cpudai>;
+                simple-audio-card,frame-master = <&cpudai>;
+
+                cpudai: simple-audio-card,cpu {
+                    sound-dai = <&i2s_rp1>;
+                };
+
+                simple-audio-card,codec {
+                    sound-dai = <&wm8960>;
+                };
+            };
+        };
+    };
+};
+DTS
+
+# 3. Kompilieren
+dtc -@ -I dts -O dtb -o wm8960-rpi5.dtbo wm8960-rpi5.dts
+
+# 4. Installation
+sudo cp wm8960-rpi5.dtbo /boot/firmware/overlays/ 2>/dev/null || sudo cp wm8960-rpi5.dtbo /boot/overlays/
+
+# 5. Config.txt anpassen (RPi 5 Pfad beachten)
+CONFIG_PATH="/boot/firmware/config.txt"
+[ ! -f $CONFIG_PATH ] && CONFIG_PATH="/boot/config.txt"
+
+sudo sed -i '/dtoverlay=wm8960-rpi5/d' $CONFIG_PATH
+sudo sed -i '/dtparam=i2c_arm=on/d' $CONFIG_PATH
+echo "dtparam=i2c_arm=on" | sudo tee -a $CONFIG_PATH
+echo "dtoverlay=wm8960-rpi5" | sudo tee -a $CONFIG_PATH
+
+echo "--- Fertig für RPi 5! ---"
+echo "System wird in 5 Sekunden neu gestartet..."
+sleep 5
+sudo reboot
+EOF
+
+chmod +x install_wm8960_rpi5.sh
+./install_wm8960_rpi5.sh
+```
+
+
+
 # rpi 4
 
 ```bash
