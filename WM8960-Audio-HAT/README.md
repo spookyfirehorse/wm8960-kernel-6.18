@@ -24,7 +24,7 @@ gpio=17=op,dh
 
 sudo systemctl disable  wm8960-soundcard.service
 
-sudo wm8960-final-fix.dtbo /boot/firmware/overlays/
+sudo cp  wm8960-final-fix.dtbo /boot/firmware/overlays/
 
 ```
 
