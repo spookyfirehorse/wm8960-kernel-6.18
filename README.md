@@ -1,3 +1,109 @@
+# rpi 4 kernel 6.18
+
+```bash
+cat << 'EOF' > install_wm8960_rpi4_6.18.sh
+#!/bin/bash
+# WM8960 Installer für RPi 4 - Optimiert für Kernel 6.18
+# Nutzt das integrierte snd-soc-wm8960 Modul
+
+echo "--- Installiere WM8960 für RPi 4 (Kernel 6.18) ---"
+
+# 1. System-Tools sicherstellen
+sudo apt update
+sudo apt install -y device-tree-compiler i2c-tools
+
+# 2. Das High-Precision Overlay für Kernel 6.18 erstellen
+cat << 'DTS' > wm8960-rpi4.dts
+/dts-v1/;
+/plugin/;
+
+/ {
+    compatible = "brcm,bcm2711";
+
+    /* I2S am BCM2711 aktivieren */
+    fragment@0 {
+        target = <&i2s>;
+        __overlay__ {
+            status = "okay";
+        };
+    };
+
+    /* I2C1 für den WM8960 Codec */
+    fragment@1 {
+        target = <&i2c1>;
+        __overlay__ {
+            #address-cells = <1>;
+            #size-cells = <0>;
+            status = "okay";
+
+            wm8960: wm8960@1a {
+                compatible = "wlf,wm8960";
+                reg = <0x1a>;
+                #sound-dai-cells = <0>;
+                /* Kernel 6.18 benötigt oft explizite Clock-Referenzen */
+                clocks = <&clocks 38>; // BCM2835_CLK_GP0
+                clock-names = "mclk";
+                AVDD-supply = <&vdd_3v3_reg>;
+                DVDD-supply = <&vdd_3v3_reg>;
+            };
+        };
+    };
+
+    /* Soundkarten-Definition (Simple-Audio-Card) */
+    fragment@2 {
+        target-path = "/";
+        __overlay__ {
+            wm8960_card {
+                compatible = "simple-audio-card";
+                simple-audio-card,name = "WM8960-Audio";
+                simple-audio-card,format = "i2s";
+                
+                /* RPi 4 ist Master */
+                simple-audio-card,bitclock-master = <&cpudai>;
+                simple-audio-card,frame-master = <&cpudai>;
+
+                cpudai: simple-audio-card,cpu {
+                    sound-dai = <&i2s>;
+                    dai-tdm-slot-num = <2>;
+                    dai-tdm-slot-width = <32>;
+                };
+
+                simple-audio-card,codec {
+                    sound-dai = <&wm8960>;
+                };
+            };
+        };
+    };
+};
+DTS
+
+# 3. Kompilieren (DTC ist hier die sicherste Wahl)
+dtc -@ -I dts -O dtb -o wm8960-rpi4.dtbo wm8960-rpi4.dts
+
+# 4. Installation in den neuen Boot-Pfad
+# Kernel 6.18 nutzt oft /boot/firmware/ (Debian 12/13 Standard)
+DEST="/boot/firmware/overlays"
+[ ! -d "$DEST" ] && DEST="/boot/overlays"
+
+sudo cp wm8960-rpi4.dtbo "$DEST/"
+
+# 5. Config.txt Bereinigung und Aktivierung
+CONFIG="/boot/firmware/config.txt"
+[ ! -f "$CONFIG" ] && CONFIG="/boot/config.txt"
+
+sudo sed -i '/wm8960-rpi4/d' "$CONFIG"
+echo "dtoverlay=wm8960-rpi4" | sudo tee -a "$CONFIG"
+echo "dtparam=i2c_arm=on" | sudo tee -a "$CONFIG"
+
+echo "--- Installation abgeschlossen! ---"
+echo "Ein Neustart wird dringend empfohlen: sudo reboot"
+EOF
+
+chmod +x install_wm8960_rpi4_6.18.sh
+./install_wm8960_rpi4_6.18.sh
+```
+
+
 # rpi 5
 
 ```bash
