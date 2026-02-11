@@ -14,9 +14,7 @@ sudo ./meine-install-ohne-kernel.sh
 ```
 
 
-```bash
-reboot
-```
+        reboot
 
 # rpi 3 kernel 6.12
 
