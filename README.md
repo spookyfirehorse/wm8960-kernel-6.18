@@ -12,6 +12,8 @@ chmod +x meine*
 ``bash
 sudo ./meine-install-ohne-kernel.sh
 ```
+
+
 ```bash
 reboot
 ```
