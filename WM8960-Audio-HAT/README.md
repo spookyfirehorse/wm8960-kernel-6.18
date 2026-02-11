@@ -6,14 +6,26 @@ http://www.waveshare.net/shop/WM8960-Audio-HAT.htm
 
 http://www.waveshare.com/wm8960-audio-hat.htm
 
-### Install wm8960-soundcard
+### Install wm8960-soundcard rpi 3
 Get the wm8960 soundcard source code. and install all linux kernel drivers
 
 ```bash
 git clone https://github.com/waveshare/WM8960-Audio-HAT
 cd WM8960-Audio-HAT
 sudo ./install.sh 
-sudo reboot
+
+sudo nano /boot/firmware/config.txt
+
+dtparam=i2s=on
+#dtoverlay=seeed-2mic-voicecard
+dtparam=i2c_arm=on
+dtoverlay=wm8960-clock-fix
+gpio=17=op,dh
+
+sudo systemctl disable  wm8960-soundcard.service
+
+sudo wm8960-final-fix.dtbo /boot/firmware/overlays/
+
 ```
 
 While the upstream wm8960 codec is not currently supported by current Pi kernel builds, upstream wm8960 has some bugs, we had fixed it. we must it build manually.
