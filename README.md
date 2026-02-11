@@ -472,3 +472,16 @@ chmod +x install_wm8960_zero2w.sh
 ```
 
 
+# Versuche es mit 0dB oder +13dB statt dem Maximum
+amixer sset 'ALC' off
+amixer sset 'Left Input Mixer Boost' 0
+amixer sset 'Right Input Mixer Boost' 0
+# Mikrofon-Eingänge (L/R) einschalten
+amixer sset 'Left Input Mixer Boost' on
+amixer sset 'Right Input Mixer Boost' on
+
+# Den ADC (Analog-Digital-Converter) mit dem Mikrofon verbinden
+amixer sset 'ADC PCM' 100%
+
+# Aufnahme-Lautstärke (Capture) hochdrehen
+amixer sset 'Capture' 100%
