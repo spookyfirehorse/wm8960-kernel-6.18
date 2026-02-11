@@ -1,6 +1,19 @@
 # rpi 4
-
-
+```bash
+git clone https://github.com/spookyfirehorse/seeed-2mic-voicecard-wm8960-soundcard-kernel6.18.git
+```
+```bash
+cd seeed-2mic-voicecard-wm8960-soundcard-kernel6.18
+```
+```bash
+chmod +x meine*
+```
+``bash
+sudo ./meine-install-ohne-kernel.sh
+```
+```bash
+reboot
+```
 
 # rpi 3
 
