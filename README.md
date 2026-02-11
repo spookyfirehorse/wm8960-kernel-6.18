@@ -1,4 +1,5 @@
-# rpi 4
+# rpi 4 kernel 6.18
+
 ```bash
 git clone https://github.com/spookyfirehorse/seeed-2mic-voicecard-wm8960-soundcard-kernel6.18.git
 ```
@@ -15,7 +16,7 @@ sudo ./meine-install-ohne-kernel.sh
 reboot
 ```
 
-# rpi 3
+# rpi 3 kernel 6.12
 
 ```bash
 cat << 'EOF' > install_wm8960.sh
