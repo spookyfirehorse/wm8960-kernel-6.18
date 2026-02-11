@@ -11,22 +11,30 @@ keyestudio 2 mic may others
 https://www.amazon.de/dp/B07H3T8SQY?ref=ppx_yo2ov_dt_b_fed_asin_title
 
 
-### Install wm8960-soundcard + seeed-2mic-voicecard
+### Install wm8960-soundcard + seeed-2mic-voicecard 6.12 kernel 
 
-Get the wm8960 soundcard source code. and install all linux kernel drivers on 6.18
+
+```bash
+git clone https://github.com/waveshare/WM8960-Audio-HAT
+cd WM8960-Audio-HAT
+sudo ./install.sh 
+sudo reboot
+```
+
+### Install wm8960-soundcard + seeed-2mic-voicecard kernel 6.18
 
 # without kernel headers
 
 ```bash
 git clone https://github.com/spookyfirehorse/seeed-2mic-voicecard-wm8960-soundcard-kernel6.18.git
-cd seeed-2mic-voicecard-wm8960-soundcard-kernel6.18/WM8960-Audio-HAT/
+cd seeed-2mic-voicecard-wm8960-soundcard-kernel6.18/
 sudo chmod +x  meine-install-ohne-kernel.sh
 sudo ./ meine-install-ohne-kernel.sh 
 ```
-# mit kernel headers
+# with kernel headers
 ```bash
 git clone https://github.com/spookyfirehorse/seeed-2mic-voicecard-wm8960-soundcard-kernel6.18.git
-cd seeed-2mic-voicecard-wm8960-soundcard-kernel6.18/WM8960-Audio-HAT/
+cd seeed-2mic-voicecard-wm8960-soundcard-kernel6.18/
 sudo chmod +x  meine-install.sh
 sudo ./ meine-install-ohne-kernel.sh 
 ```
