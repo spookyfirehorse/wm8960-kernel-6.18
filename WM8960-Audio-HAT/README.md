@@ -26,6 +26,9 @@ sudo systemctl disable  wm8960-soundcard.service
 
 sudo cp  wm8960-final-fix.dtbo /boot/firmware/overlays/
 
+sudo dmesg | grep wm8960
+
+lsmod | grep snd_soc_wm8960
 ```
 
 While the upstream wm8960 codec is not currently supported by current Pi kernel builds, upstream wm8960 has some bugs, we had fixed it. we must it build manually.
