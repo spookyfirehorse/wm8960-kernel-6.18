@@ -33,14 +33,12 @@ lsmod | grep snd_soc_wm8960
 ## pi4 6.12
 
 ```bash
-git clone https://github.com/spookyfirehorse/seeed-2mic-voicecard-wm8960-soundcard-kernel6.18.git
-cd seeed-2mic-voicecard-wm8960-soundcard-kernel6.18/WM860-Audio-HAT
-sudo chmod +x meine-install.sh
-sudo ./meine-install.sh
+git clone https://github.com/waveshare/WM8960-Audio-HAT
+sudo ./install.sh
 sudo nano /boot/firmware/config.txt
 dtoverlay=i2s
-dtoverlay=i2s-mmap
-dtoverlay=wm8960-final-fix
+dtparam=i2c_arm=on
+dtoverlay=wm8960-soundcard
 ```
 
 
