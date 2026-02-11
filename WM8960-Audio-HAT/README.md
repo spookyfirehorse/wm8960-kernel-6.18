@@ -30,6 +30,21 @@ sudo dmesg | grep wm8960
 
 lsmod | grep snd_soc_wm8960
 ```
+## pi4 6.12
+
+```bash
+git clone https://github.com/spookyfirehorse/seeed-2mic-voicecard-wm8960-soundcard-kernel6.18.git
+cd seeed-2mic-voicecard-wm8960-soundcard-kernel6.18/WM860-Audio-HAT
+sudo chmod +x meine-install.sh
+sudo ./meine-install.sh
+sudo nano /boot/firmware/config.txt
+dtoverlay=i2s
+dtoverlay=i2s-mmap
+dtoverlay=wm8960-final-fix
+```
+
+
+
 
 While the upstream wm8960 codec is not currently supported by current Pi kernel builds, upstream wm8960 has some bugs, we had fixed it. we must it build manually.
 
