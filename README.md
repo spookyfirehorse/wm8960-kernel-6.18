@@ -85,7 +85,7 @@ chmod +x install_wm8960_rpi4.sh
 ./install_wm8960_rpi4.sh
 ```
 
-
+# rpi 3
 
 ```bash
 cat << 'EOF' > install_wm8960.sh
