@@ -19,11 +19,24 @@ sudo reboot
 
 ```bash
 git clone https://github.com/waveshare/WM8960-Audio-HAT
+```
+```bash
 sudo ./install.sh
+```
+```bash
 sudo nano /boot/firmware/config.txt
 dtoverlay=i2s
 dtparam=i2c_arm=on
 dtoverlay=wm8960-soundcard
+```
+
+```bash
+sudo nano /etc/modules
+i2c-dev
+snd-soc-wm8960
+#snd-soc-wm8960-soundcard
+```
+```bash
 sudo systemctl disable  wm8960-soundcard.service
 ```
 ## pi4 6.18
@@ -37,6 +50,8 @@ dtoverlay=i2s
 dtparam=i2c_arm=on
 dtoverlay=wm8960-soundcard
 sudo systemctl disable  wm8960-soundcard.service
+sudo nano /etc/modules
+
 ```
 
 
