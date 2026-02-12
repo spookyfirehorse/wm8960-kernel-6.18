@@ -24,6 +24,7 @@ sudo nano /boot/firmware/config.txt
 dtoverlay=i2s
 dtparam=i2c_arm=on
 dtoverlay=wm8960-soundcard
+sudo systemctl disable  wm8960-soundcard.service
 ```
 While the upstream wm8960 codec is not currently supported by current Pi kernel builds, upstream wm8960 has some bugs, we had fixed it. we must it build manually.
 
