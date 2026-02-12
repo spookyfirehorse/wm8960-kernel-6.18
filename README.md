@@ -70,8 +70,7 @@ blacklist snd_soc_wm8960_soundcard
 blacklist snd_bcm2835
 ```
 
-## pi3 6.12
-
+ #  pi3 6.12
 ```bash
 sudo nano /boot/firmware/config.txt
 ```
