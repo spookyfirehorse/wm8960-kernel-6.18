@@ -26,6 +26,20 @@ dtparam=i2c_arm=on
 dtoverlay=wm8960-soundcard
 sudo systemctl disable  wm8960-soundcard.service
 ```
+## pi4 6.18
+
+```bash
+git clone https://github.com/spookyfirehorse/seeed-2mic-voicecard-wm8960-soundcard-kernel6.18.git
+cd seeed-2mic-voicecard-wm8960-soundcard-kernel6.18
+sudo ./meine-install.sh
+sudo nano /boot/firmware/config.txt
+dtoverlay=i2s
+dtparam=i2c_arm=on
+dtoverlay=wm8960-soundcard
+sudo systemctl disable  wm8960-soundcard.service
+```
+
+
 While the upstream wm8960 codec is not currently supported by current Pi kernel builds, upstream wm8960 has some bugs, we had fixed it. we must it build manually.
 
 Check that the sound card name matches the source code wm8960-soundcard.
