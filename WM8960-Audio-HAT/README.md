@@ -35,6 +35,12 @@ sudo dmesg | grep wm8960
 
 lsmod | grep snd_soc_wm8960
 ```
+
+```bash
+sudo nano /etc/modprobe.d/blacklist-wm8960.conf 
+blacklist snd_soc_wm8960_soundcard
+blacklist snd_bcm2835
+```
 ## pi4 6.12
 
 ```bash
@@ -44,7 +50,9 @@ sudo nano /boot/firmware/config.txt
 git clone https://github.com/waveshare/WM8960-Audio-HAT
 cd WM8960-Audio-HAT
 sudo ./install.sh 
+```
 
+```bash
 sudo nano /boot/firmware/config.txt
 dtoverlay=vc4-kms-v3d,cma-512,noaudio
 max_framebuffers=2
@@ -56,20 +64,28 @@ dtparam=i2s=on
 dtparam=i2c_arm=on
 dtoverlay=wm8960-clock-fix
 gpio=17=op,dh
-
+```
+```bash
 sudo systemctl disable  wm8960-soundcard.service
-
+```
+```bash
 sudo cp  wm8960-final-fix.dtbo /boot/firmware/overlays/
-
+```
+```bash
 sudo dmesg | grep wm8960
-
+```
+```bash
 lsmod | grep snd_soc_wm8960
 dtoverlay=i2s
 dtparam=i2c_arm=on
 dtoverlay=wm8960-soundcard
 ```
 
-
+```bash
+sudo nano /etc/modprobe.d/blacklist-wm8960.conf 
+blacklist snd_soc_wm8960_soundcard
+blacklist snd_bcm2835
+```
 
 
 While the upstream wm8960 codec is not currently supported by current Pi kernel builds, upstream wm8960 has some bugs, we had fixed it. we must it build manually.
