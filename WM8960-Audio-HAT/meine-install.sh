@@ -17,7 +17,7 @@ fi
 
 ver="1.0"
 marker="0.0.0"
-FIX_DTBO="wm8960-final-fix.dtbo"
+FIX_DTBO="wm8960-clock-fix.dtbo"
 CONFIG_PATH="/boot/firmware/config.txt"
 [ ! -f "$CONFIG_PATH" ] && CONFIG_PATH="/boot/config.txt"
 
