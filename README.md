@@ -96,7 +96,7 @@ sudo systemctl disable  wm8960-soundcard.service
 sudo nano /etc/modprobe.d/blacklist-wm8960.conf
 ```
 
-``bash
+```bash
 blacklist snd_soc_wm8960_soundcard
 blacklist snd_bcm2835
 ```
