@@ -22,13 +22,17 @@ dtoverlay=wm8960-soundcard
 
 ```bash
 sudo nano /etc/modules
+```
+```bash
 i2c-dev
 snd-soc-wm8960
 ```
 
 ```bash
 sudo nano /etc/modprobe.d/blacklist-wm8960.conf
+```
 
+```bash
 blacklist snd_soc_wm8960_soundcard
 blacklist snd_bcm2835
 ```
