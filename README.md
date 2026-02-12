@@ -51,10 +51,9 @@ dtparam=i2c_arm=on
 dtoverlay=wm8960-soundcard
 sudo systemctl disable  wm8960-soundcard.service
 sudo nano /etc/modules
-i2c-dev
-snd-soc-wm8960
-#snd-soc-wm8960-soundcard
-
+dtoverlay=i2s
+dtparam=i2c_arm=on
+dtoverlay=wm8960-final-fix
 ```
 
 
