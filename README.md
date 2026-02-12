@@ -30,6 +30,16 @@ blacklist snd_soc_wm8960_soundcard
 blacklist snd_bcm2835
 ```
 
+```bash
+sudo nano /etc/modules
+```
+
+```bash
+i2c-dev
+snd-soc-wm8960
+```
+
+
  #  pi 6.12
 
 ```bash
