@@ -16,6 +16,11 @@ sudo ./install.sh
 
 sudo nano /boot/firmware/config.txt
 
+dtoverlay=vc4-kms-v3d,cma-512,noaudio
+max_framebuffers=2
+camera_auto_detect=0
+dtoverlay=imx708
+vc4.tv_norm=PAL
 dtparam=i2s=on
 #dtoverlay=seeed-2mic-voicecard
 dtparam=i2c_arm=on
@@ -36,6 +41,29 @@ lsmod | grep snd_soc_wm8960
 git clone https://github.com/waveshare/WM8960-Audio-HAT
 sudo ./install.sh
 sudo nano /boot/firmware/config.txt
+git clone https://github.com/waveshare/WM8960-Audio-HAT
+cd WM8960-Audio-HAT
+sudo ./install.sh 
+
+sudo nano /boot/firmware/config.txt
+dtoverlay=vc4-kms-v3d,cma-512,noaudio
+max_framebuffers=2
+camera_auto_detect=0
+dtoverlay=imx708
+vc4.tv_norm=PAL
+dtparam=i2s=on
+#dtoverlay=seeed-2mic-voicecard
+dtparam=i2c_arm=on
+dtoverlay=wm8960-clock-fix
+gpio=17=op,dh
+
+sudo systemctl disable  wm8960-soundcard.service
+
+sudo cp  wm8960-final-fix.dtbo /boot/firmware/overlays/
+
+sudo dmesg | grep wm8960
+
+lsmod | grep snd_soc_wm8960
 dtoverlay=i2s
 dtparam=i2c_arm=on
 dtoverlay=wm8960-soundcard
