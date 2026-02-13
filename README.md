@@ -2,8 +2,7 @@
 ```bash
 git clone https://github.com/spookyfirehorse/wm8960-kernel-6.18.git
 cd wm8960-kernel-6.18
-chhmod +x *.sh
-./pi-4-6.18.sh
+sudo cp wm8960-fix.dtbo /boot/firmware/overlays/
 ```
 
 ```bash
@@ -56,6 +55,14 @@ sudo cp wm8960-kernel-6.18/wm8960-* /boot/firmware/overlays/
 ```
 
  #  pi 3
+
+```bash
+git clone https://github.com/spookyfirehorse/wm8960-kernel-6.18.git
+cd wm8960-kernel-6.18
+sudo cp wm8960-fix.dtbo /boot/firmware/overlays/
+```
+
+ 
 
 ```bash
 sudo nano /boot/firmware/config.txt
