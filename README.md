@@ -1,3 +1,5 @@
+./uninstall.sh all wm8960 modules
+
 
 ## all pi
 ```bash
