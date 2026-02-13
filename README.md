@@ -38,9 +38,11 @@ sudo nano /etc/modules
 i2c-dev
 snd-soc-wm8960
 ```
+```bash
+sudo cp wm8960-kernel-6.18/wm8960-* /boot/firmware/overlays/
+```
 
-
- #  pi 6.12
+ #  pi 3
 
 ```bash
 sudo nano /boot/firmware/config.txt
@@ -74,11 +76,18 @@ blacklist snd_bcm2835
 ```bash
 sudo nano /etc/modules
 ```
+
 ```bash
 i2c-dev
 snd-soc-wm8960
 ```
-kernel 6.18
+
+```bash
+sudo cp wm8960-kernel-6.18/wm8960-* /boot/firmware/overlays/
+```
+
+
+pi 4
 
 ```bash
 #!/bin/bash
@@ -114,6 +123,7 @@ i2c-dev
 snd-soc-wm8960
 EOF
 
+sudo cp wm8960-kernel-6.18/wm8960-* /boot/firmware/overlays/
 echo "Fertig! Bitte starte das System mit 'sudo reboot' neu."
 ```
 
