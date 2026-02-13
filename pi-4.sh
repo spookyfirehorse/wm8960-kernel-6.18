@@ -31,5 +31,6 @@ sudo tee /etc/modules > /dev/null <<EOF
 i2c-dev
 snd-soc-wm8960
 EOF
+
 sudo cp wm8960-kernel-6.18/wm8960-* /boot/firmware/overlays/
 echo "Fertig! Bitte starte das System mit 'sudo reboot' neu."
