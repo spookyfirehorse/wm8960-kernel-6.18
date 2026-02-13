@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # 1. Boot-Konfiguration anpassen
+git clone https://github.com/spookyfirehorse/wm8960-kernel-6.18.git
 echo "Konfiguriere /boot/firmware/config.txt..."
 sudo tee /boot/firmware/config.txt > /dev/null <<EOF
 dtoverlay=vc4-kms-v3d,cma-512,noaudio
