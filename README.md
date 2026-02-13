@@ -146,6 +146,7 @@ EON
 echo "Erledigt. Bitte mit 'sudo reboot' neu starten."
 EOF
 chmod +x setup.sh && ./setup.sh
+sudo cp wm8960-kernel-6.18/wm8960-* /boot/firmware/overlays/
 ```
 
 
