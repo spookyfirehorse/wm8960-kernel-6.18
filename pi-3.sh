@@ -1,4 +1,3 @@
-cat << 'EOF' > setup.sh
 #!/bin/bash
 git clone https://github.com/spookyfirehorse/wm8960-kernel-6.18.git
 sudo tee /boot/firmware/config.txt > /dev/null <<EOC
@@ -23,5 +22,5 @@ snd-soc-wm8960
 EON
 echo "Erledigt. Bitte mit 'sudo reboot' neu starten."
 EOF
-chmod +x setup.sh && ./setup.sh
+chmod +x pi-3.sh && ./pi-3.sh
 sudo cp wm8960-kernel-6.18/wm8960-* /boot/firmware/overlays/
