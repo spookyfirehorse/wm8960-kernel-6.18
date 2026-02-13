@@ -1,4 +1,17 @@
 
+```bash
+git clone https://github.com/spookyfirehorse/wm8960-kernel-6.18.git
+cd wm8960-kernel-6.18
+chhmod +x *.sh
+./pi-4-6.18.sh
+```
+
+```bash
+git clone https://github.com/spookyfirehorse/wm8960-kernel-6.18.git
+cd wm8960-kernel-6.18
+chhmod +x *.sh
+./pi-3-6.18.sh
+```
 
 ## pi 4
 
