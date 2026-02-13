@@ -1,5 +1,13 @@
 
 ## all pi
+```bash
+git clone https://github.com/spookyfirehorse/wm8960-kernel-6.18.git
+cd wm8960-kernel-6.18
+```
+
+```bash
+sudo cp wm8960-kernel-6.18/wm8960-* /boot/firmware/overlays/
+```
 
 ```bash
 sudo nano /boot/firmware/config.txt
@@ -37,9 +45,7 @@ sudo nano /etc/modules
 i2c-dev
 snd-soc-wm8960
 ```
-```bash
-sudo cp wm8960-kernel-6.18/wm8960-* /boot/firmware/overlays/
-```
+
 
 
 
