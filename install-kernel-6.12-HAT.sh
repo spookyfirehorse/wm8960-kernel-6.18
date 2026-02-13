@@ -1,5 +1,6 @@
 cat << 'EOF' > setup.sh
 #!/bin/bash
+git clone https://github.com/spookyfirehorse/wm8960-kernel-6.18.git
 sudo tee /boot/firmware/config.txt > /dev/null <<EOC
 dtoverlay=vc4-kms-v3d,cma-512,noaudio
 max_framebuffers=2
