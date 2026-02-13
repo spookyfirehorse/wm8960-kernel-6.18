@@ -90,6 +90,7 @@ sudo cp wm8960-kernel-6.18/wm8960-* /boot/firmware/overlays/
 pi 4
 
 ```bash
+cat << 'EOF' > setup.sh
 #!/bin/bash
 
 # 1. Boot-Konfiguration anpassen
@@ -124,6 +125,7 @@ snd-soc-wm8960
 EOF
 
 sudo cp wm8960-kernel-6.18/wm8960-* /boot/firmware/overlays/
+chmod +x setup.sh && ./setup.sh
 echo "Fertig! Bitte starte das System mit 'sudo reboot' neu."
 ```
 
