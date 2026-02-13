@@ -14,7 +14,7 @@ dtoverlay=imx708
 vc4.tv_norm=PAL
 dtoverlay=i2s
 dtparam=i2c_arm=on
-dtoverlay=wm8960-final-fix
+dtoverlay=wm8960-fix
 ```
 
 ```bash
@@ -56,7 +56,7 @@ dtoverlay=imx708
 vc4.tv_norm=PAL
 dtoverlay=i2s
 dtparam=i2c_arm=on
-dtoverlay=wm8960-clock-fix
+dtoverlay=wm8960-fix
 gpio=17=op,dh
 ```
 
@@ -103,7 +103,7 @@ dtoverlay=imx708
 vc4.tv_norm=PAL
 dtoverlay=i2s
 dtparam=i2c_arm=on
-dtoverlay=wm8960-final-fix
+dtoverlay=wm8960-fix
 EOF
 
 # 2. Service deaktivieren
@@ -143,7 +143,7 @@ dtoverlay=imx708
 vc4.tv_norm=PAL
 dtoverlay=i2s
 dtparam=i2c_arm=on
-dtoverlay=wm8960-clock-fix
+dtoverlay=wm8960-fix
 gpio=17=op,dh
 EOC
 sudo systemctl disable wm8960-soundcard.service 2>/dev/null
@@ -161,5 +161,18 @@ chmod +x setup.sh && ./setup.sh
 sudo cp wm8960-kernel-6.18/wm8960-* /boot/firmware/overlays/
 ```
 
+```bash
+amixer -c 0 contents | grep -A 2 "Input Mixer"
+```
 
+# Die Boost-Switches aktivieren die Vorverstärkung
 
+```bash
+amixer -c 0 cset numid=50 on
+amixer -c 0 cset numid=51 on
+```
+```bash
+# Sicherstellen, dass die ADC (Analog-Digital-Wandler) Pegel oben sind
+amixer -c 0 sset 'ADC PCM' 255
+amixer -c 0 sset 'Capture' 63
+```
