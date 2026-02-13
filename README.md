@@ -1,6 +1,6 @@
 
 
-## pi  6.18
+## pi 4
 
 ```bash
 sudo nano /boot/firmware/config.txt
@@ -118,7 +118,7 @@ echo "Fertig! Bitte starte das System mit 'sudo reboot' neu."
 ```
 
 
-pi kernel 6.12
+pi 3
 
 ```bash
 cat << 'EOF' > setup.sh
