@@ -11,7 +11,7 @@ dtoverlay=imx708
 vc4.tv_norm=PAL
 dtoverlay=i2s
 dtparam=i2c_arm=on
-dtoverlay=wm8960-final-fix
+dtoverlay=wm8960-fix
 EOF
 
 # 2. Service deaktivieren
@@ -32,5 +32,5 @@ i2c-dev
 snd-soc-wm8960
 EOF
 
-sudo cp wm8960-kernel-6.18/wm8960-* /boot/firmware/overlays/
+sudo cp wm8960-kernel-6.18/wm8960-fix.dtbo /boot/firmware/overlays/
 echo "Fertig! Bitte starte das System mit 'sudo reboot' neu."
