@@ -1,7 +1,7 @@
 ./uninstall.sh all wm8960 modules
 
 
-``bash
+```bash
 6.12 vs 6.18  6.18 dtparam=audio=on 
 ```
 
