@@ -54,7 +54,9 @@ snd-soc-wm8960
 ```bash
 amixer -c 0 contents | grep -A 2 "Input Mixer"
 ```
-
+```bash
+ sudo dmesg | grep wm8960
+```
 # Die Boost-Switches aktivieren die Vorverstärkung
 
 ```bash
