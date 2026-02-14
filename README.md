@@ -1,9 +1,13 @@
 ./uninstall.sh all wm8960 modules
 
 
+``bash
 6.12 vs 6.18  6.18 dtparam=audio=on 
-6.12 dtparam=audio=off also dtoverlay=vc4-kms-v3d,cma-512,noaudio
+```
 
+```bash
+6.12 dtparam=audio=off also dtoverlay=vc4-kms-v3d,cma-512,noaudio
+```
 
 ## all pi 6.18
 
