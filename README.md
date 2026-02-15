@@ -55,14 +55,7 @@ i2c-dev
 snd-soc-wm8960
 ```
 
-```bash
-amixer -c 0 contents | grep -A 2 "Input Mixer"
-```
 
-
-```bash
- sudo dmesg | grep wm8960
-```
 ```bash
 sudo nano /etc/modprobe.d/allsa-base.conf
 ```
@@ -121,6 +114,18 @@ alias alsamixer='alsamixer -c 0'
 alias amixer='amixer -c 0'
 ```
 
+```bash
+sudo reboot
+```
+
+```bash
+amixer -c 0 contents | grep -A 2 "Input Mixer"
+```
+
+
+```bash
+ sudo dmesg | grep wm8960
+```
 
 # Die Boost-Switches aktivieren die Vorverstärkung
 
