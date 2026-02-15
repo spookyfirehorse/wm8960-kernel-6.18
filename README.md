@@ -66,8 +66,8 @@ snd-soc-wm8960
 sudo nano /etc/modprobe.d/allsa-base.conf
 ```
 ```bash
-options snd-usb-audio index=-2
-options snd-soc-wm8960 index=0
+#options snd-usb-audio index=-2
+options snd slots=snd_soc_wm8960,snd-usb-audio
 ```
 
 
