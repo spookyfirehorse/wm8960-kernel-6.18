@@ -67,6 +67,7 @@ snd-soc-wm8960
 sudo nano /etc/modprobe.d/allsa-base.conf
 ```
 ```bash
+options snd-soc-simple-card index=0
 options snd-usb-audio index=-1
 options vc4_hdmi index=2
 ```
