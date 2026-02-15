@@ -25,7 +25,7 @@ sudo nano /boot/firmware/config.txt
 ```
 
 ```bash
-dtoverlay=vc4-kms-v3d,cma-512
+dtoverlay=vc4-kms-v3d,cma-512,noaudio
 max_framebuffers=2
 camera_auto_detect=0
 dtoverlay=imx708
@@ -33,7 +33,7 @@ vc4.tv_norm=PAL
 dtoverlay=i2s
 dtparam=i2c_arm=on
 dtoverlay=wm8960-soundcard
-dtparam=audio=on
+dtparam=audio=off
 ```
 
 ```bash
@@ -137,6 +137,46 @@ amixer -c 0 contents | grep -A 2 "Input Mixer"
 ```bash
  sudo dmesg | grep wm8960
 ```
+```bash
+nano .asoundrc
+```
+```bash
+# Trennung von Wiedergabe und Aufnahme (asym)
+pcm.!default {
+    type asym
+    playback.pcm "dmix_out"
+    capture.pcm "dsnoop_in"
+}
+
+# Wiedergabe-Layer (Mehrere Apps gleichzeitig)
+pcm.dmix_out {
+    type plug
+    slave {
+        pcm "hw:0,0"
+        rate 48000
+        period_size 1024
+        buffer_size 4096
+    }
+}
+
+# Aufnahme-Layer (Mehrere Apps können gleichzeitig aufnehmen)
+pcm.dsnoop_in {
+    type plug
+    slave {
+        pcm "hw:0,0"
+        rate 48000
+        period_size 1024
+        buffer_size 4096
+    }
+}
+
+# WICHTIG: Direkt-Zugriff für amixer/alsamixer auf alle Regler
+ctl.!default {
+    type hw
+    card 0
+}
+```
+
 # Die Boost-Switches aktivieren die Vorverstärkung
 
 
