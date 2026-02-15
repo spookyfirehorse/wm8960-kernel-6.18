@@ -102,6 +102,15 @@ ctl.!default {
 }
 ```
 
+```bash
+nano .bashrc
+```
+```bash
+alias alsamixer='alsamixer -c 0'
+alias amixer='amixer -c 0'
+```
+
+
 # Die Boost-Switches aktivieren die Vorverstärkung
 
 
