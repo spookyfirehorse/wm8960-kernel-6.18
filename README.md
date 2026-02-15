@@ -67,7 +67,7 @@ sudo nano /etc/modprobe.d/allsa-base.conf
 ```
 ```bash
 options snd-usb-audio index=-2
-options snd-soc-simple-card index=0
+options snd-soc-wm8960 index=0
 ```
 
 
