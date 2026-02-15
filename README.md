@@ -1,93 +1,4 @@
-./uninstall.sh all wm8960 modules
 
-
-```bash
-6.12 vs 6.18  6.18 dtparam=audio=on dtoverlay=vc4-kms-v3d,cma-512
-```
-
-```bash
-6.12 dtparam=audio=off also dtoverlay=vc4-kms-v3d,cma-512,noaudio
-```
-
-## all pi 6.18
-
-```bash
-git clone https://github.com/spookyfirehorse/wm8960-kernel-6.18.git
-cd wm8960-kernel-6.18
-```
-
-```bash
-sudo cp wm8960-kernel-6.18/wm8960-* /boot/firmware/overlays/
-```
-
-```bash
-sudo nano /boot/firmware/config.txt
-```
-
-```bash
-dtoverlay=vc4-kms-v3d,cma-512,noaudio
-max_framebuffers=2
-camera_auto_detect=0
-dtoverlay=imx708
-vc4.tv_norm=PAL
-dtoverlay=i2s
-dtparam=i2c_arm=on
-dtoverlay=wm8960-soundcard
-dtparam=audio=off
-```
-
-```bash
-sudo systemctl disable  wm8960-soundcard.service
-```
-
-```bash
-sudo nano /etc/modprobe.d/blacklist-wm8960.conf
-```
-
-```bash
-blacklist snd_soc_wm8960_soundcard
-blacklist snd_bcm2835
-```
-
-```bash
-sudo nano /etc/modules
-```
-
-```bash
-i2c-dev
-snd-soc-wm8960
-```
-````bash
-sudo nano /etc/modprobe.d/allsa-base.conf
-```
-
-```bash
-options snd-usb-audio index=-2
-# WM8960 Priorität geben
-options snd_soc_wm8960 index=0
-
-# HDMI-Module auf hintere Plätze zwingen
-#options snd_soc_vc4_hdmi index=1,2
-#options vc4_hdmi index=1,2
-```
-
-
-```bash
-amixer -c 0 contents | grep -A 2 "Input Mixer"
-```
-```bash
- sudo dmesg | grep wm8960
-```
-# Die Boost-Switches aktivieren die Vorverstärkung
-
-```bash
-amixer -c 0 cset numid=50 on
-amixer -c 0 cset numid=51 on
-```
-```bash
-# Sicherstellen, dass die ADC (Analog-Digital-Wandler) Pegel oben sind
-amixer -c 0 sset 'ADC PCM' 255
-amixer -c 0 sset 'Capture' 63
 ```
 ##########################################################################
 
@@ -95,6 +6,7 @@ amixer -c 0 sset 'Capture' 63
 
 
 ## all pi 6.12
+
 ```bash
 git clone https://github.com/spookyfirehorse/wm8960-kernel-6.18.git
 cd wm8960-kernel-6.18
@@ -148,9 +60,11 @@ amixer -c 0 contents | grep -A 2 "Input Mixer"
 ```bash
  sudo dmesg | grep wm8960
 ```
+
 ```bash
 nano .asoundrc
 ```
+
 ```bash
 # Trennung von Wiedergabe und Aufnahme (asym)
 pcm.!default {
