@@ -65,8 +65,6 @@ sudo nano /etc/modprobe.d/allsa-base.conf
 ```
 ```bash
 options snd-usb-audio index=-2
-# WM8960 Priorität geben
-options snd_soc_wm8960 index=0
 options snd-soc-simple-card index=0
 ```
 
