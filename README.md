@@ -4,6 +4,10 @@
 
 ./uninstall.sh all wm8960 modules
 
+```bash
+with hdmi disable noaudio dtpara audio on
+```
+
 
 ## all pi 6.y
 
