@@ -5,7 +5,7 @@
 ./uninstall.sh all wm8960 modules
 
 
-## all pi 6.12
+## all pi 6.y
 
 ```bash
 git clone https://github.com/spookyfirehorse/wm8960-kernel-6.18.git
