@@ -60,6 +60,16 @@ amixer -c 0 contents | grep -A 2 "Input Mixer"
 ```bash
  sudo dmesg | grep wm8960
 ```
+```bash
+sudo nano /etc/modprobe.d/allsa-base.conf
+```
+```bash
+options snd-usb-audio index=-2
+# WM8960 Priorität geben
+options snd_soc_wm8960 index=0
+options snd-soc-simple-card index=0
+```
+
 
 ```bash
 nano .asoundrc
