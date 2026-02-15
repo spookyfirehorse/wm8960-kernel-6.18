@@ -57,6 +57,7 @@ snd-soc-wm8960
 amixer -c 0 contents | grep -A 2 "Input Mixer"
 ```
 
+
 ```bash
  sudo dmesg | grep wm8960
 ```
