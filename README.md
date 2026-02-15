@@ -18,6 +18,7 @@ with hdmi disable noaudio dtpara audio on
 ```bash
 git clone https://github.com/spookyfirehorse/wm8960-kernel-6.18.git
 cd wm8960-kernel-6.18
+sudo cp asound.conf /etc/
 ```
 
 ```bash
@@ -66,8 +67,8 @@ snd-soc-wm8960
 sudo nano /etc/modprobe.d/allsa-base.conf
 ```
 ```bash
-#options snd-usb-audio index=-2
-options snd slots=snd_soc_wm8960,snd-usb-audio
+options snd-usb-audio index=-1
+options vc4_hdmi index=2
 ```
 
 
