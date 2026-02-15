@@ -41,7 +41,6 @@ sudo nano /etc/modprobe.d/blacklist-wm8960.conf
 ```
 
 ```bash
-blacklist snd_soc_wm8960_soundcard
 blacklist snd_bcm2835
 ```
 
@@ -57,6 +56,7 @@ snd-soc-wm8960
 ```bash
 amixer -c 0 contents | grep -A 2 "Input Mixer"
 ```
+
 ```bash
  sudo dmesg | grep wm8960
 ```
@@ -146,3 +146,4 @@ amixer -c 0 cset numid=51 on
 # Sicherstellen, dass die ADC (Analog-Digital-Wandler) Pegel oben sind
 amixer -c 0 sset 'ADC PCM' 255
 amixer -c 0 sset 'Capture' 63
+```
