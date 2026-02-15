@@ -106,33 +106,45 @@ ctl.!default {
 
 
 # Haupt-Ausgangs-Mixer aktivieren (wichtig für Ton!)
+```bash
 amixer -c 0 sset 'Left Output Mixer PCM' on
 amixer -c 0 sset 'Right Output Mixer PCM' on
-
+```
 # Kopfhörer-Lautstärke (0-127)
+```bash
 amixer -c 0 sset 'Headphone' 120
-
+```
 # Lautsprecher-Lautstärke (0-127)
+```bash
 amixer -c 0 sset 'Speaker' 120
-
+```
 # Playback-Pegel (Digitaler Master)
+```bash
 amixer -c 0 sset 'PCM' 200
-
+```
 
 # Boost-Switches für Mikrofon-Vorverstärkung (deine Befehle)
+
+```bash
 amixer -c 0 cset numid=50 on
 amixer -c 0 cset numid=51 on
-
+```
 # Eingangsquelle auf Mikrofon (L/R) setzen
+
+```bash
 amixer -c 0 sset 'Left Input Mixer Boost' on
 amixer -c 0 sset 'Right Input Mixer Boost' on
-
+```
 # ADC Pegel (Digitalisierung)
-amixer -c 0 sset 'ADC PCM' 255
 
+```bash
+amixer -c 0 sset 'ADC PCM' 255
+```
+
+```bash
 # Aufnahme-Lautstärke (Analog)
 amixer -c 0 sset 'Capture' 63
-
+```
 
 
 
