@@ -57,8 +57,19 @@ sudo nano /etc/modules
 i2c-dev
 snd-soc-wm8960
 ```
+````bash
+sudo nano /etc/modprobe.d/allsa-base.conf
+```
 
+```bash
+options snd-usb-audio index=-2
+# WM8960 Priorität geben
+options snd_soc_wm8960 index=0
 
+# HDMI-Module auf hintere Plätze zwingen
+#options snd_soc_vc4_hdmi index=1,2
+#options vc4_hdmi index=1,2
+```
 
 
 ```bash
