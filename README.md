@@ -1,6 +1,12 @@
 
 
 ./uninstall.sh all wm8960 modules
+```bash
+git clone https://github.com/respeaker/seeed-voicecard
+cd seeed-voicecard
+sudo ./uninstall.sh
+sudo reboot
+```
 
 ```bash
 with hdmi disable noaudio dtpara audio on
