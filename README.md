@@ -121,6 +121,38 @@ ctl.!default {
     card 0
 }
 ```
+# for pipewire alsa
+
+```bash
+sudo sh -c 'echo "PIPEWIRE_LATENCY=512/48000" >> /etc/environment'
+```
+```bash
+sudo nano /etc/pipewire/pipewire.conf.d/10-low-latency.conf
+```
+```bash
+context.properties = {
+    default.clock.rate          = 48000
+    default.clock.quantum       = 512
+    default.clock.min-quantum   = 512
+    default.clock.max-quantum   = 512
+}
+```
+
+
+```bash
+nano .asoundrc
+```
+
+```bash
+ctl.!default {
+    type pipewire
+}
+
+pcm.!default {
+    type pipewire
+    mmap_emulation 1
+}
+```
 
 ```bash
 nano .bashrc
