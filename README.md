@@ -20,11 +20,7 @@ git clone https://github.com/spookyfirehorse/wm8960-kernel-6.18.git
 cd wm8960-kernel-6.18
 sudo cp asound.conf /etc/
 ```
-```bash
-sudo mkdir -p /etc/alsa/conf.d/disabled
-sudo mv /etc/alsa/conf.d/99-pulse.conf /etc/alsa/conf.d/disabled/
-sudo mv /etc/alsa/conf.d/50-pulseaudio.conf /etc/alsa/conf.d/disabled/
-```
+
 
 
 ```bash
@@ -138,6 +134,13 @@ context.properties = {
 }
 ```
 
+```bash
+sudo mkdir -p /etc/alsa/conf.d/disabled
+sudo mv /etc/alsa/conf.d/99-pulse.conf /etc/alsa/conf.d/disabled/
+sudo mv /etc/alsa/conf.d/50-pulseaudio.conf /etc/alsa/conf.d/disabled/
+```
+
+mmap_emulation 1 push alsa direct to pipewire
 
 ```bash
 nano .asoundrc
