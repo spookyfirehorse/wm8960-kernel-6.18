@@ -66,6 +66,7 @@ sudo nano /etc/modules
 ```bash
 i2c-dev
 snd-soc-wm8960
+snd-soc-simple-card
 ```
 
 
