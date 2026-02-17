@@ -85,6 +85,8 @@ sudo rm -r /etc/pulse
 ```bash
 nano .asoundrc
 ```
+
+
 ```bash
 ctl.!default {
     type pipewire
@@ -96,52 +98,17 @@ pcm.!default {
         pcm "pwire"
         format S16_LE
         rate 48000
-    }
-}
-```
-
-oder
-
-```bash
-nano .asoundrc
-```
-
-```bash
-# Trennung von Wiedergabe und Aufnahme (asym)
-pcm.!default {
-    type asym
-    playback.pcm "dmix_out"
-    capture.pcm "dsnoop_in"
-}
-
-# Wiedergabe-Layer (Mehrere Apps gleichzeitig)
-pcm.dmix_out {
-    type plug
-    slave {
-        pcm "hw:0,0"
-        rate 48000
-        period_size 1024
-        buffer_size 4096
+        period_size 256
+        buffer_size 1024
     }
 }
 
-# Aufnahme-Layer (Mehrere Apps können gleichzeitig aufnehmen)
-pcm.dsnoop_in {
-    type plug
-    slave {
-        pcm "hw:0,0"
-        rate 48000
-        period_size 1024
-        buffer_size 4096
-    }
-}
-
-# WICHTIG: Direkt-Zugriff für amixer/alsamixer auf alle Regler
-ctl.!default {
-    type hw
-    card 0
+pcm.pwire {
+    type pipewire
+    mmap_emulation 1
 }
 ```
+
 # for pipewire alsa
 
 ```bash
