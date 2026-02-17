@@ -67,7 +67,7 @@ snd-soc-simple-card
 
 
 ```bash
-sudo nano /etc/modprobe.d/allsa-base.conf
+sudo nano /etc/modprobe.d/alsa-base.conf
 ```
 ```bash
 options snd-soc-simple-card index=0
