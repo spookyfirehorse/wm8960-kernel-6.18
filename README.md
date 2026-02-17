@@ -168,23 +168,6 @@ sudo mv /etc/alsa/conf.d/99-pulse.conf /etc/alsa/conf.d/disabled/
 sudo mv /etc/alsa/conf.d/50-pulseaudio.conf /etc/alsa/conf.d/disabled/
 ```
 
-mmap_emulation 1 push alsa direct to pipewire
-
-```bash
-nano .asoundrc
-```
-
-```bash
-ctl.!default {
-    type pipewire
-}
-
-pcm.!default {
-    type pipewire
-    mmap_emulation 1
-}
-```
-
 ```bash
 nano .bashrc
 ```
