@@ -75,7 +75,32 @@ options snd-bcm2835 index=1
 options snd-usb-audio index=2
 options vc4_hdmi index=3
 ```
+```bash
+sudo apt install pipewire-alsa -y
+sudo apt purge pulseaudio* -y
+sudo rm -r /etc/pulse
+```
 
+
+```bash
+nano .asoundrc
+```
+```bash
+ctl.!default {
+    type pipewire
+}
+
+pcm.!default {
+    type plug
+    slave {
+        pcm "pwire"
+        format S16_LE
+        rate 48000
+    }
+}
+```
+
+oder
 
 ```bash
 nano .asoundrc
