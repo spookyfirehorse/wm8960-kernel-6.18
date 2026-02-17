@@ -109,10 +109,12 @@ pcm.pwire {
 }
 ```
 
-# for pipewire alsa
+# for pipewire alsa realtime change all 1024 to 256
+
+# but also in pipewire
 
 ```bash
-sudo sh -c 'echo "PIPEWIRE_LATENCY=512/48000" >> /etc/environment'
+sudo sh -c 'echo "PIPEWIRE_LATENCY=1024/48000" >> /etc/environment'
 ```
 ```bash
 sudo nano /etc/pipewire/pipewire.conf.d/10-low-latency.conf
@@ -120,10 +122,44 @@ sudo nano /etc/pipewire/pipewire.conf.d/10-low-latency.conf
 ```bash
 context.properties = {
     default.clock.rate          = 48000
-    default.clock.quantum       = 512
-    default.clock.min-quantum   = 512
-    default.clock.max-quantum   = 512
+    default.clock.quantum       = 1024
+    default.clock.min-quantum   = 1024
+    default.clock.max-quantum   = 1024
 }
+```
+```bash
+sudo nano /etc/pipewire/client.conf.d/99-alsa-s16.conf
+```
+
+```bash
+alsa.properties = {
+    audio.format = "S16LE"
+}
+```
+```bash
+sudo nano /etc/pipewire/pipewire-pulse.conf.d/99-rpicam-s16.conf
+```
+```bash
+pulse.rules = [
+    {
+        matches = [ { application.process.binary = "rpicam-vid" } ]
+        actions = {
+            update-props = {
+                # Erzwungenes Format
+                pulse.default.format = "S16LE"
+                pulse.fix.format     = "S16LE"
+                audio.format         = "S16LE"
+
+                # Berechnung für 256 Samples:
+                # 256 Samples * 2 Bytes (16-Bit) * 2 Kanäle (Stereo) = 1024 Bytes  meins fragsize   4096 bei quantum 1024
+                pulse.attr.fragsize = "4096"
+
+                # PipeWire Blockgröße
+                node.force-quantum = 1024
+            }
+        }
+    }
+]
 ```
 
 ```bash
@@ -152,6 +188,8 @@ pcm.!default {
 ```bash
 nano .bashrc
 ```
+# put in on the end
+
 ```bash
 alias alsamixer='alsamixer -c 0'
 alias amixer='amixer -c 0'
