@@ -109,16 +109,52 @@ pcm.pwire {
 }
 ```
 
-# for pipewire alsa realtime change all 1024 to 256
+```bash
+sudo apt install pipewire-alsa rtkit
+```
 
-# but also in pipewire
 
 ```bash
-sudo sh -c 'echo "PIPEWIRE_LATENCY=1024/48000" >> /etc/environment'
+sudo rm -r /etc/pipewire
+sudo mkdir /etc/pipewire
+sudo mkdir /etc/pipewire/pipewire-pulse.conf.d
+sudo mkdir /etc/pipewire/client.conf.d/
+sudo mkdir /etc/pipewire/pipewire.conf.d/
+sudo mkdir /etc/wireplumber
+sudo mkdir /etc/wireplumber/wireplumber.conf.d/
 ```
+```bash
+sudo nano /etc/wireplumber/wireplumber.conf.d/50-alsa-s16le.conf
+```
+
+```bash
+monitor.alsa.rules = [
+  {
+    matches = [
+      {
+        # Matcht alle Ausgänge
+        node.name = "~alsa_output.*"
+      },
+      { 
+        # Matcht alle Eingänge
+        node.name = "~alsa_input.*"
+      }
+    ]
+    actions = {
+      update-props = {
+        # Erzwingt S16LE für beide oben genannten Gruppen
+        audio.format = "S16LE"
+      }
+    }
+  }
+]
+```
+
+
 ```bash
 sudo nano /etc/pipewire/pipewire.conf.d/10-low-latency.conf
 ```
+
 ```bash
 context.properties = {
     default.clock.rate          = 48000
@@ -127,6 +163,110 @@ context.properties = {
     default.clock.max-quantum   = 1024
 }
 ```
+# dont set it lower because audio comes to late 
+
+
+# realtime
+
+```bash
+sudo nano /etc/pipewire/pipewire.conf.d/10-realtime.conf
+```
+
+```bash
+context.properties = {
+    default.clock.rate          = 48000
+    default.clock.quantum       = 256
+    default.clock.min-quantum   = 256
+    default.clock.max-quantum   = 256
+}
+```
+
+```bash
+sudo nano /etc/enviroment
+```
+
+```bash
+PIPEWIRE_LATENCY=256/48000
+```
+
+```bash
+pulse.rules = [
+    {
+        matches = [ { application.process.binary = "rpicam-vid" } ]
+        actions = {
+            update-props = {
+                # Erzwungenes Format
+                pulse.default.format = "S16LE"
+                pulse.fix.format     = "S16LE"
+                audio.format         = "S16LE"
+
+                # Berechnung für 256 Samples:
+                # 256 Samples * 2 Bytes (16-Bit) * 2 Kanäle (Stereo) = 1024 Bytes  meins fragsize   4096 bei quantum 1024
+                pulse.attr.fragsize = "1024"
+
+                # PipeWire Blockgröße
+                node.force-quantum = 256
+            }
+        }
+    }
+]
+```
+
+######################################
+# normal kernel 
+
+```bash
+sudo rm -r /etc/pipewire
+sudo mkdir /etc/pipewire
+sudo mkdir /etc/pipewire/pipewire-pulse.conf.d
+sudo mkdir /etc/pipewire/client.conf.d/
+sudo mkdir /etc/pipewire/pipewire.conf.d/
+sudo mkdir /etc/wireplumber
+sudo mkdir /etc/wireplumber/wireplumber.conf.d/
+```
+```bash
+sudo nano /etc/wireplumber/wireplumber.conf.d/50-alsa-s16le.conf
+```
+
+```bash
+monitor.alsa.rules = [
+  {
+    matches = [
+      {
+        # Matcht alle Ausgänge
+        node.name = "~alsa_output.*"
+      },
+      { 
+        # Matcht alle Eingänge
+        node.name = "~alsa_input.*"
+      }
+    ]
+    actions = {
+      update-props = {
+        # Erzwingt S16LE für beide oben genannten Gruppen
+        audio.format = "S16LE"
+      }
+    }
+  }
+]
+```
+
+```bash
+sudo nano /etc/pipewire/pipewire.conf.d/10-low-latency.conf
+```
+
+
+```bash
+context.properties = {
+    default.clock.rate          = 48000
+    default.clock.quantum       = 1024
+    default.clock.min-quantum   = 1024
+    default.clock.max-quantum   = 1024
+}
+```
+# dont set it lower because audio comes to late 
+
+
 ```bash
 sudo nano /etc/pipewire/client.conf.d/99-alsa-s16.conf
 ```
@@ -161,6 +301,26 @@ pulse.rules = [
     }
 ]
 ```
+
+```bash
+sudo nano /etc/enviroment
+```
+
+```bash
+PIPEWIRE_LATENCY=1024/48000
+```
+
+sudo nano /etc/security/limits.d/99-realtime.conf 
+```
+
+```bash
+spook  -  rtprio     99
+spook  -  memlock    unlimited
+spook  -  nice      -20
+#*  -  rtprio     99
+#*  -  memlock    unlimited
+```
+
 
 ```bash
 sudo mkdir -p /etc/alsa/conf.d/disabled
