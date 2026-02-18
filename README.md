@@ -189,6 +189,11 @@ sudo nano /etc/enviroment
 PIPEWIRE_LATENCY=256/48000
 ```
 
+
+```bash
+sudo nano /etc/pipewire/pipewire-pulse.conf.d/99-rpicam-s16.conf
+```
+
 ```bash
 pulse.rules = [
     {
