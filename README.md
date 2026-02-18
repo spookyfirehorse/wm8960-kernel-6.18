@@ -336,6 +336,13 @@ nano .bashrc
 ```bash
 alias alsamixer='alsamixer -c 0'
 alias amixer='amixer -c 0'
+# PipeWire Aliase
+alias pw='pw-cli'
+alias ptop='pw-top'
+alias plink='pw-link -i'
+alias pmon='pw-mon'
+# Unterdrückt die kosmetischen Fehlermeldungen beim Start von pw-cli
+alias pw-cli='pw-cli info 0'
 ```
 
 ```bash
