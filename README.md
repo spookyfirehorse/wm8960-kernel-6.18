@@ -351,6 +351,14 @@ amixer -c 0 contents | grep -A 2 "Input Mixer"
  sudo dmesg | grep wm8960
 ```
 
+```bash
+pw-top
+```
+
+```bash
+pw-cli
+```
+
 # Die Boost-Switches aktivieren die Vorverstärkung
 
 
